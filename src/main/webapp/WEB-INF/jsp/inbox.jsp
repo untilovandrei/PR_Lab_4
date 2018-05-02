@@ -16,19 +16,28 @@
         
         <spring:url value="/resources/css/inbox.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" var="inboxCss" />
         <link rel="stylesheet" href="${inboxCss}" />
+        <spring:url value="/spring-mvc/newMessage.html" var="newMessage" />
+        <spring:url value="/spring-mvc/logIn.html" var="logOut" />
+        
         
     </head>
     <body class="is-loading"  >
-
+                
+        <h1 style="color: black"> Inbox : ${messagesList.size()} messages  </h1>                    
+        
+                        
+                
         <div id="wrapper">
 
             <section  id="main" >
+                
         <table cellpadding="0" cellspacing="0" border="0">
             <thead>
                 <tr>
                     <th>From</th>
                     <th>Description</th>
                     <th>Date</th>
+                    <th>Access</th>
                 </tr>
             </thead>
         </table>
@@ -41,14 +50,21 @@
                         <td>${messageData.sender}</td>
                         <td>${messageData.subject}</td>
                         <td>${messageData.date}</td>
+                        <td><a href="/WebEmailClient/spring-mvc/readMessage/${messageData.id}/message.html" class="ghost-button">Read</a></td>
                     </tr>
                 </c:forEach>
                 
             </tbody>
             </table>
             </div>
+                <div style="padding-top: 20px">
+                    <a href="${newMessage}" class="ghost-button">New message</a>
+                    <a href="${logOut}" class="ghost-button">Log out</a>
+                </div>
+                
                 </section>
         </div>
+        
         
                 <script src="${respondJs}"></script>
         <script src="${htmlJs}"></script>

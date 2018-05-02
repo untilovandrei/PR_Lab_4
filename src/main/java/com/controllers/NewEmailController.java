@@ -36,7 +36,7 @@ public class NewEmailController {
         return new MessageData();
     }
     
-    @RequestMapping("/spring-mvc/newEmail.html")
+    @RequestMapping("/spring-mvc/newMessage.html")
     public String loadNewMailPage(HttpSession session){
         Connector connector=(Connector) session.getAttribute("connector");
         //LOG.info("$$$$ Alive After= "+ connector.isAlive());
@@ -49,7 +49,7 @@ public class NewEmailController {
             LOG.info("**** "+user.toString());
             passEmail(user,message);
         
-        return "redirect:/spring-mvc/newEmail.html";
+        return "redirect:/spring-mvc/inbox.html";
     }
     
     

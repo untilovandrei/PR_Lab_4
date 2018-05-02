@@ -676,6 +676,7 @@
 			opacity: 0.5;
 		}
 
+
 /* Main */
 
 	#main {
@@ -752,10 +753,10 @@
 
                 body.is-loading #main {
 			opacity: 0.9;                       
-                        -moz-transform:  rotateY(90deg);
-                        -webkit-transform: rotateY(90deg) ;
-                        -ms-transform: rotateY(90deg) ;
-                        transform: rotateY(90deg) ;
+                        -moz-transform:  rotateX(90deg);
+                        -webkit-transform: rotateX(90deg) ;
+                        -ms-transform: rotateX(90deg) ;
+                        transform: rotateX(90deg) ;
 		}
                  
 

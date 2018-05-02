@@ -5,21 +5,37 @@
  */
 package com.entities;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
  * @author andrei
  */
-public class MessageData {
+public class MessageData implements Serializable{
+    private int id;
     private String sender;
     private String recipient;
     private String subject;
     private String text;
     private Date date;
+    private static List<MessageData> list;
+    
+    
 
     public MessageData() {
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
 
     public String getRecipient() {
         return recipient;
@@ -59,6 +75,14 @@ public class MessageData {
 
     public void setSender(String sender) {
         this.sender = sender;
+    }
+
+    public static List<MessageData> getList() {
+        return list;
+    }
+
+    public static void setList(List<MessageData> list) {
+        MessageData.list = list;
     }
     
     
