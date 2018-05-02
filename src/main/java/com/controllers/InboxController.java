@@ -32,11 +32,36 @@ public class InboxController {
     private static final Logger LOG = Logger.getLogger(InboxController.class.getName());
     
     
-    
+    @ModelAttribute("messagesList")
+    public List<MessageData> setupInboxPage(HttpSession seesion) throws MessagingException{
+        Connector connector= (Connector) seesion.getAttribute("connector");
+        Store store=connector.getStore();
+        Folder inbox = store.getFolder("Inbox");
+        inbox.open(Folder.READ_WRITE);
+        List<MessageData> messagesList = new ArrayList<>();
+        Message[] arrayMessages = inbox.getMessages();
+        
+        
+        for (int i = arrayMessages.length-1; i >= arrayMessages.length-50; i--) {
+            Message message=arrayMessages[i];
+            MessageData messageData= new MessageData();
+            messageData.setSubject(message.getSubject());
+            messageData.setDate(message.getReceivedDate());
+            messageData.setSender(message.getFrom()[0].toString());
+            LOG.info("---------------------------------");
+            LOG.info("Email Number " + (arrayMessages.length-i));
+            LOG.info("Subject: " + messageData.getSubject());
+            LOG.info("Date: " + messageData.getDate());
+            LOG.info("From: " + messageData.getSender());
+            messagesList.add(messageData);
+      }
+        return messagesList;
+        
+    }
     
     
     @RequestMapping("/spring-mvc/inbox.html")
-    public String loadInboxPage(Model model, HttpSession session) throws MessagingException{
+    public String loadInboxPage() throws MessagingException{
         return "inbox";
     }
 }
