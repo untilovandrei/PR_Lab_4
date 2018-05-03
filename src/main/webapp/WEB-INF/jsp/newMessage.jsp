@@ -21,7 +21,7 @@
 
 
 
-        <link href="${logInCss}" rel="stylesheet" />
+        <link href="${logInCss}" rel="stylesheet" type="text/css"/>
         <script src="${minJs}"></script>
         
 <style>
@@ -52,7 +52,7 @@
                         <form:errors path="subject" cssClass="error"/>
                     </div>
                     <div class="textarea">
-                        <form:textarea path="text"  placeholder="Write message...." />
+                        <form:textarea path="text"  placeholder="Write message...." rows="5"/>
                         <form:errors path="text" cssClass="error"/>
                     </div>
 

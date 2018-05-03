@@ -23,12 +23,7 @@
 
         <link href="${logInCss}" rel="stylesheet" />
         <script src="${minJs}"></script>
-        
-<style>
-    .error {
-        color: red; font-weight: bold;
-    }
-</style>
+       
 
     </head>
     <body class="is-loading">
@@ -49,7 +44,7 @@
                         <h2>Subject</h2>  <form:input path="subject" readonly="true" />
                     </div>
                     <div class="textarea">
-                        <h2>Message</h2> <form:textarea path="text" rows="10" readonly="true"/>
+                        <h2>Text</h2> <form:textarea path="text" rows="10" readonly="true"/>
                     </div>
                 </form:form>
 

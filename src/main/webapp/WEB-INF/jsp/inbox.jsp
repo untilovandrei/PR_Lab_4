@@ -12,19 +12,21 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Inbox</title>
         
         <spring:url value="/resources/css/inbox.css?<?php echo date('l jS \of F Y h:i:s A'); ?>" var="inboxCss" />
         <link rel="stylesheet" href="${inboxCss}" />
         <spring:url value="/spring-mvc/newMessage.html" var="newMessage" />
         <spring:url value="/spring-mvc/logIn.html" var="logOut" />
+        <spring:url value="/spring-mvc/inboxMessages.html" var="loadInbox" />
+        
         
         
     </head>
     <body class="is-loading"  >
-                
-        <h1 style="color: black"> Inbox : ${messagesList.size()} messages  </h1>                    
-        
+        <c:if test="${messagesList.size()>0}">
+            <h1 style="color: white"> Inbox : ${messagesList.size()} messages  </h1>    
+        </c:if>
                         
                 
         <div id="wrapper">
@@ -58,6 +60,7 @@
             </table>
             </div>
                 <div style="padding-top: 20px">
+                    <a href="${loadInbox}" class="ghost-button">Load messages</a>
                     <a href="${newMessage}" class="ghost-button">New message</a>
                     <a href="${logOut}" class="ghost-button">Log out</a>
                 </div>

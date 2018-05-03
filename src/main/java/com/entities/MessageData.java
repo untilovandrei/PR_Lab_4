@@ -20,6 +20,7 @@ public class MessageData implements Serializable{
     private String subject;
     private String text;
     private Date date;
+    private int attachments=0;
     private static List<MessageData> list;
     
     
@@ -34,9 +35,15 @@ public class MessageData implements Serializable{
     public void setId(int id) {
         this.id = id;
     }
-    
-    
 
+    public int getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(int attachments) {
+        this.attachments = attachments;
+    }
+    
     public String getRecipient() {
         return recipient;
     }
@@ -84,15 +91,17 @@ public class MessageData implements Serializable{
     public static void setList(List<MessageData> list) {
         MessageData.list = list;
     }
+
+    @Override
+    public String toString() {
+        return "MessageData{" + "id=" + id + ",\n sender=" + sender + ",\n recipient=" + recipient + ",\n subject=" + subject + ",\n text=" + text + ",\n date=" + date + ",\n attachments=" + attachments + '}';
+    }
     
     
     
     
 
-    @Override
-    public String toString() {
-        return "Message{" + "recipient=" + recipient + ", subject=" + subject + ", text=" + text + '}';
-    }
+   
     
     
 }

@@ -16,7 +16,11 @@ import javax.mail.BodyPart;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.Part;
 import javax.mail.Store;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.servlet.http.HttpSession;
 import org.aspectj.util.LangUtil;
@@ -37,10 +41,19 @@ public class InboxController {
     
     private static final Logger LOG = Logger.getLogger(InboxController.class.getName());
     
+    @ModelAttribute("messagesList")
+    public List<MessageData> initList(){
+        return new ArrayList<>();
+    }
     
     @RequestMapping("/spring-mvc/inbox.html")
-    public String loadInboxPage(HttpSession session,Model model) throws MessagingException, IOException{
-         Connector connector= (Connector) session.getAttribute("connector");
+    public String loadInboxPage() throws MessagingException, IOException{
+         return "inbox";
+    }
+    
+    @RequestMapping("/spring-mvc/inboxMessages.html")
+    public String loadMessages(HttpSession session,Model model) throws MessagingException, IOException{
+        Connector connector= (Connector) session.getAttribute("connector");
         Store store=connector.getStore();
         Folder inbox = store.getFolder("Inbox");
         inbox.open(Folder.READ_WRITE);
@@ -56,15 +69,13 @@ public class InboxController {
             messageData.setDate(message.getReceivedDate());
             messageData.setSender(message.getFrom()[0].toString());
             
+            
             String text=getTextFromMessage(message);
             
             messageData.setText(getFirstSentence(text));
+           
             LOG.info("---------------------------------");
-            LOG.info("Email Number " + messageData.getId());
-            LOG.info("Subject: " + messageData.getSubject());
-            LOG.info("Date: " + messageData.getDate());
-            LOG.info("From: " + messageData.getSender());
-            LOG.info("Text: " + messageData.getText());
+            LOG.info(messageData.toString());
             messagesList.add(messageData);
             id++;
       }
@@ -72,6 +83,7 @@ public class InboxController {
     
         MessageData.setList(messagesList);
         return "inbox";
+        
     }
     
     
@@ -79,11 +91,7 @@ public class InboxController {
     public String readMessage(@PathVariable int id, Model model, HttpSession session){
         MessageData message=MessageData.getList().get(Integer.valueOf(id)-1);
         LOG.info("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-            LOG.info("Email Number " + message.getId());
-            LOG.info("Subject: " + message.getSubject());
-            LOG.info("Date: " + message.getDate());
-            LOG.info("From: " + message.getSender());
-            LOG.info("Text: " + message.getText());
+        LOG.info(message.toString());
         model.addAttribute("message", message);
         
        return "readMessage";
@@ -111,7 +119,7 @@ public class InboxController {
     return result;
 }
 
-private String getTextFromMimeMultipart(
+    private String getTextFromMimeMultipart(
         MimeMultipart mimeMultipart)  throws MessagingException, IOException{
     String result = "";
     int count = mimeMultipart.getCount();
@@ -129,10 +137,15 @@ private String getTextFromMimeMultipart(
     }
     return result;
 }
+    
+   
 
     private String getFirstSentence(String text) {
         StringBuilder sb=new StringBuilder(text);
-        sb.substring(0, sb.indexOf(".")+1);
-        return sb.toString();
+        String string = sb.substring(0, sb.indexOf(".")+1);
+        return string;
     }
+    
+    
+         
 }

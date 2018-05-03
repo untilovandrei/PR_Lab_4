@@ -48,7 +48,7 @@
                 <h1>Authentification</h1>
                 <hr/>
 
-                <form:form action="${logInURL}" commandName="user" autocomplete="off">
+                <form:form action="${logInURL}" commandName="user" >
                     <div class="field">
                         <form:input path="email"  placeholder="Email" />
                         <form:errors path="email" cssClass="error"/>
