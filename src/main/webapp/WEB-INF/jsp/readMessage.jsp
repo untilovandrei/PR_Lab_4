@@ -38,18 +38,18 @@
 
             <!-- Main -->
             <section id="main">
-                
+                <h1>Message </h1>
                 <hr/>
 
                 <form:form commandName="message">
                     <div class="field">
-                        Sender : <form:input path="sender" readonly="true" />
+                        <h2>Sender</h2> <form:input path="sender" readonly="true" />
                     </div>
                     <div class="field" style="width: 600px">
-                        Subject : <form:input path="subject" readonly="true" />
+                        <h2>Subject</h2>  <form:input path="subject" readonly="true" />
                     </div>
                     <div class="textarea">
-                        Message : <form:textarea path="text" readonly="true"/>
+                        <h2>Message</h2> <form:textarea path="text" rows="10" readonly="true"/>
                     </div>
                 </form:form>
 
